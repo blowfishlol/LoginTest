@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "blowfish",
+    "password": null,
+    "database": "usertrain-dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "blowfish",
+    "password": null,
+    "database": "usertrain-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "usertrain-prod",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
