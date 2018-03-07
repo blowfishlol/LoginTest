@@ -4,9 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     content: {
       type: DataTypes.STRING,
       allowNull: false,
-  }, {});
+  }});
+
   Twoot.associate = function(models) {
-    Twoot.belongsTo(modles.User, {
+    Twoot.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
     });
