@@ -9,7 +9,7 @@ module.exports = {
 
         return User
         .findOne({
-            attributes: ['username','fullname'],
+            attributes: ['username','fullname', 'birthdate', 'id'],
             where: {
                 username: request.body.username,
                 password: md5(request.body.password),

@@ -70,6 +70,52 @@ module.exports = {
 
     },
 
-    //todo update users
+    update(request, response) {
+
+
+        //this works by first selecting(findOne) the data of the user according to the id
+        //then the input will be checked if exists or not
+        //if it exists, it will update with the new data
+        //if the input is none, or there is no change to the attribute,
+        //it will use the old value procured from the first query.
+        //STILL NOT SURE IF THIS IS THE CORRECT WAY THOUGH LOL
+        return User
+        .findOne({
+            attributes: ['id','username','fullname','birthdate'],
+            where: {
+                id: request.params.userId,
+            }
+        }).then(user => {
+
+            //if fullname is given through the HTTP body, it will use the given fullname.
+            //if not, it will use the previous user fullname so it does not update to a new value.
+            const fullnameNew = (typeof request.body.fullname === 'undefined' || request.body.fullname === "" ? user.dataValues.fullname : request.body.fullname);
+
+            //if birthdate is given it will use the new birthdate as the update value
+            //if not, it will use the previous birthdate procured from the database, so it does not update to a new value
+            const birthdateNew = (typeof request.body.birthdate ==='undefined' || request.body.birthdate ==="" ? user.dataValues.birthdate : request.body.birthdate);
+
+            //after the value for the update is got, it will execute the update
+            return user
+                .update({
+                    fullname: fullnameNew,
+                    birthdate: birthdateNew,
+                } , {
+                    where: request.params.userId,
+                })
+                .then(user => response.status(201).send(user))
+                .catch();
+
+
+        })
+        .catch(error => {
+            response.status(401).send(error)
+
+        });
+
+
+
+
+    },
 
 }

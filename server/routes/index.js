@@ -23,10 +23,11 @@ module.exports = (app) => {
     app.post('/api/user/create', usersController.create);
     app.post('/api/user/showall', usersController.showAllUsers);
     app.post('/api/user/:userId/showuser', usersController.showUser);
+    app.post('/api/user/:userId/update', usersController.update);
 
     //FOR TWOOTS
     app.post('/api/twoot/:userId/create',twootsController.create);
-    app.post('/api/twoot/:userId/display', twootsController.displayAllTwoots);
-    app.post('/api/twoot/:userId/display/:twootId', twootsController.displaySingleTwoot);
+    app.get('/api/twoot/:userId/display', twootsController.displayAllTwoots);
+    app.get('/api/twoot/:userId/display/:twootId', twootsController.displaySingleTwoot);
     app.post('/api/twoot/update', twootsController.update);
 };
