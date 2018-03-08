@@ -21,6 +21,44 @@ module.exports = {
     //required body: content, twootId
     update(request, response) {
 
+        //find one twoot first to evaluate the previous value
+        return Twoot
+        .findOne({
+            attributes: ['id','content','userId'],
+            where: {
+                id: request.params.twootId,
+            }
+        }).then(twoot => {
+
+            //evaluate if the body of the POST have the content or not
+            // if it is blank, it will not change the content
+            const newContent = (
+                (typeof request.body.fullname === 'undefined'  || request.body.content === "") ?
+                twoot.dataValues.content : request.body.content
+            );
+
+            //actually updating the twoot
+            return Twoot
+                .update({
+                        content: newContent,
+                    },{
+                        where: {
+                            id: request.body.twootId,
+                        }
+                    },
+                )
+                .then(twoot =>{
+                    console.log(twoot)
+                    response.status(201).send(twoot);
+                })
+                .catch(error => {throw error});
+
+        })
+        .catch(error => {
+            response.status(401).send(error)
+
+        });
+/*
         if(request.body.content && request.body.twootId){
 
             const newContent = request.body.content;
@@ -47,6 +85,7 @@ module.exports = {
             response.status(401).send({message: 'Body is not complete'});
             return;
         }
+        */
 
     },
 

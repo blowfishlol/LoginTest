@@ -110,7 +110,7 @@ module.exports = {
                     where: request.params.userId,
                 })
                 .then(user => response.status(201).send(user))
-                .catch();
+                .catch(error => {throw error});
 
 
         })
