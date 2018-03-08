@@ -131,11 +131,11 @@ module.exports = {
                     id: request.params.userId,
             }
         }).then(user => {
-            console.log("\n\n\n\n\n\n\n",user, "\n\n\n\n\n\n");
+            //console.log("\n\n\n\n\n\n\n",user, "\n\n\n\n\n\n");
             response.status(201).send(user);
         })
         .catch(error => {
-            console.log("\n\n\n\n\n\n\n",error,"\n\n\n\n\n\n\n");
+            //console.log("\n\n\n\n\n\n\n",error,"\n\n\n\n\n\n\n");
             response.status(401).send(error);
         });
     },
