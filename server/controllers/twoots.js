@@ -84,6 +84,20 @@ module.exports = {
             console.log("\n\n\n\n\n\n\n",error,"\n\n\n\n\n\n\n");
             response.status(401).send(error);
         });
+    },
+
+    //delete the twoot specified by the id
+    deleteTwoot(request, response) {
+
+        return Twoot
+            .destroy({
+                where: {
+                    id: request.body.twootId,
+                }
+            })
+            .then(() => response.status(201).send({message: 'tweet deletion success'}))
+            .catch(error => {response.status(401).send(error)
+        });
     }
 
 

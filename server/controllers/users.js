@@ -85,7 +85,8 @@ module.exports = {
             where: {
                 id: request.params.userId,
             }
-        }).then(user => {
+        })
+        .then(user => {
 
             //if fullname is given through the HTTP body, it will use the given fullname.
             //if not, it will use the previous user fullname so it does not update to a new value.
@@ -117,5 +118,22 @@ module.exports = {
 
 
     },
+
+    //deleting the user
+    delete(request,response){
+        return User
+            .destroy({
+                where: {
+                    id: request.body.userId,
+                }
+            })
+            .then(() => response.status(201).send({message: 'delete success'}))
+            .catch(error => {
+                console.log(error);
+                response.status(401).send(error);
+            });
+
+
+    }
 
 }
