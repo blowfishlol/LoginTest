@@ -87,7 +87,7 @@ module.exports = {
     },
 
     //delete the twoot specified by the id
-    deleteTwoot(request, response) {
+    delete(request, response) {
 
         return Twoot
             .destroy({

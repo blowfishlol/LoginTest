@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 require('./server/routes')(app);
 app.get('*', (request, response) => response.status(200).send({
-    message: 'This is the dummy login API.',
+    message: 'This is the twooter API.',
 }))
 
 module.exports = app;

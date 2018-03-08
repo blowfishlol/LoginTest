@@ -1,4 +1,3 @@
-//DEPRECATED, USE LOGINAUTH INSTEAD.
 const User = require('../models').User;
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
@@ -25,8 +24,12 @@ module.exports = {
             }else{
 
                 //console.log(user);
-
-                response.status(201).send(user);
+                const payload = user.dataValues;
+                console.log(payload);
+                var token = jwt.sign(payload, jwtsecret, {
+                    expiresIn: 60*60*24, //expire in 24 hrs
+                });
+                response.status(201).send({user,token});
 
             }
 
@@ -40,5 +43,30 @@ module.exports = {
 
 
     },
+
+    auth(request, response, next) {
+
+        var token = request.body.token || request.query.token || request.headers['x-access-token'];
+
+        if(token) {
+
+            jwt.verify(token, jwtsecret, function (error, decoded) {
+                if(error) {
+                    response.status(401).send(error)
+                }else{
+                    request.decoded = decoded;
+                    next();
+                }
+            });
+
+        } else {
+
+            response.status(401).send({
+                message: 'No token found.',
+            })
+
+        }
+
+    }
 
 };
