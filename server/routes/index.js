@@ -52,4 +52,7 @@ module.exports = (app) => {
     app.post('/api/twoot/update',loginauthController.auth , twootsController.update);
     //bodies: twootId
     app.post('/api/twoot/delete',loginauthController.auth , twootsController.delete);
+
+
+    app.post('/api/teapot', loginauthController.teapot);
 };

@@ -26,14 +26,14 @@ module.exports = {
 
                 //console.log(user);
 
-                response.status(201).send(user);
+                response.status(200).send(user);
 
             }
 
         })
         .catch(error => {
             console.log(error);
-            response.status(401).send(error)
+            response.status(400).send(error)
         });
 
 

@@ -29,14 +29,14 @@ module.exports = {
                 var token = jwt.sign(payload, jwtsecret, {
                     expiresIn: 60*60*24, //expire in 24 hrs
                 });
-                response.status(201).send({user,token});
+                response.status(200).send({user,token});
 
             }
 
         })
         .catch(error => {
             console.log(error);
-            response.status(401).send(error)
+            response.status(400).send(error)
         });
 
 
@@ -67,6 +67,10 @@ module.exports = {
 
         }
 
+    },
+
+    teapot(request,response){
+        response.status(418).send({message: 'im a teapot'});
     }
 
 };

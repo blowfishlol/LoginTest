@@ -49,14 +49,13 @@ module.exports = {
                 )
                 .then(twoot =>{
                     console.log(twoot)
-                    response.status(201).send(twoot);
+                    response.status(200).send(twoot);
                 })
                 .catch(error => {throw error});
 
         })
         .catch(error => {
             response.status(401).send(error)
-
         });
 /*
         if(request.body.content && request.body.twootId){
@@ -108,7 +107,7 @@ module.exports = {
             }
         }).then(user => {
             console.log(user);
-            response.status(201).send(user);
+            response.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
@@ -132,11 +131,11 @@ module.exports = {
             }
         }).then(user => {
             //console.log("\n\n\n\n\n\n\n",user, "\n\n\n\n\n\n");
-            response.status(201).send(user);
+            response.status(200).send(user);
         })
         .catch(error => {
             //console.log("\n\n\n\n\n\n\n",error,"\n\n\n\n\n\n\n");
-            response.status(401).send(error);
+            response.status(400).send(error);
         });
     },
 
@@ -149,8 +148,8 @@ module.exports = {
                     id: request.body.twootId,
                 }
             })
-            .then(() => response.status(201).send({message: 'tweet deletion success'}))
-            .catch(error => {response.status(401).send(error)
+            .then(() => response.status(200).send({message: 'tweet deletion success'}))
+            .catch(error => {response.status(400).send(error)
         });
     }
 
