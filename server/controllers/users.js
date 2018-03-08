@@ -20,7 +20,12 @@ module.exports = {
                 fullname: request.body.fullname,
                 birthdate: request.body.birthdate,
             })
-            .then(user => response.status(201).send(user))
+            .then(user => {
+                delete user.dataValues.password;
+                delete user.dataValues.updatedAt;
+                delete user.dataValues.createdAt;
+                response.status(201).send(user);
+            })
             .catch(error => response.status(400).send(error));
 
     },

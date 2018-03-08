@@ -28,7 +28,7 @@ module.exports = (app) => {
     //**********************************************
 
     //bodies: username, password, fullname, birthdate
-    app.post('/api/user/create', loginauthController.auth ,usersController.create);
+    app.post('/api/user/create' ,usersController.create);
     //bodies: none required
     app.post('/api/user/showall', loginauthController.auth ,usersController.showAllUsers);
     //bodies: none required

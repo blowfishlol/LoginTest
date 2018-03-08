@@ -1,0 +1,184 @@
+---------------------------------------
+-----------LOGIN/LOGOUT----------------
+---------------------------------------
+Login:
+    Controller.function: loginauth.login
+    Request: /api/login/
+    Method: POST
+    Bodies:
+        username
+        password
+    Returns when success:
+        user:
+            username
+            fullname
+            birthdate
+        token (contains java web token to authenticate user)
+
+    Returns when error:
+        message (contains error message)
+----------------------------------------
+
+
+---------------------------------------
+--------------USERS API----------------
+---------------------------------------
+Create User:
+    Controller.function: users.create
+    Request: /api/user/create
+    Method: POST
+    Bodies:
+        username
+        password
+        fullname
+        birthdate
+    Returns when success:
+        id (user id)
+        username
+        fullname
+        birthdate
+    Returns when error:
+        error (object)
+
+
+Show All Users:
+    Controller.function: users.showAllUsers
+    Request: /api/user/showall
+    Method: POST
+    Bodies: token (containing the token given at login)
+    Returns when success:
+        Array:
+            id
+            username
+            fullname
+            birthdate
+    Returns when error:
+        error
+
+
+Show Single User:
+    Controller.function : users.showUser
+    Request: /api/user/:userId/showuser (usage: /api/user/1/showuser to display user with id 1)
+    Method: POST
+    Bodies:
+        token
+    Returns when success:
+        id
+        username
+        fullname
+        birthdate
+    Returns when error
+        error
+
+Update User:
+    Controller.function: users.update
+    Request: /api/user/update
+    Method: POST
+    Bodies :
+        fullname OR birthdate / both
+        token (must be present)
+    Return when success:
+        id
+        username
+        fullname
+        birthdate
+        updatedAt
+    Return when error
+        error
+
+Delete User:
+    Controller.function: users.delete
+    Request: /api/user/delete
+    Method POST
+    Bodies:
+        userId
+        token
+    Returns when success:
+        message
+    Returns when error:
+        error
+-----------------------------------------
+
+
+---------------------------------------
+--------------TWOOTS API---------------
+---------------------------------------
+Create Twoot
+    Controller.function: twoots.create
+    Request: /api/twoot/:userId/create
+    Method: POST
+    Bodies:
+        token
+    Returns when success:
+        id
+        content
+        userId
+        updatedAt
+        createdAt
+    Returns when failed:
+        error
+
+Display all Twoot from a user
+    Controller.function: twoots.displayAllTwoots
+    Request: /api/twoot/:userId/display
+    Method: GET
+    Queries:
+        token
+    Returns when success
+        id
+        username
+        fullname
+        birthdate
+        twoots: (array)
+            id
+            content
+            createdAt
+            updatedAt
+            userId
+    Returns when failed
+        error
+
+Display single Twoot from a user
+    Controller.function: twoots.displaySingleTwoot
+    Request: /api/twoot/:userId/display/:twootId (example: /api/twoot/23/display/4223)
+    Method: GET
+    Queries:
+        token
+    Returns when success
+        id
+        username
+        fullname
+        birthdate
+        twoots: (single)
+            id
+            content
+            createdAt
+            updatedAt
+            userId
+    Returns when failed
+        error
+
+Update twoot
+    Controller.function: twoots.update
+    Request: /api/twoot/update
+    Method: POST
+    Bodies:
+        token
+        content
+        twootId
+    Returns when success (MIGHT BE SUBJECT TO CHANGE)
+        1
+    Returns when failed
+        0
+
+Delete Twoot
+    Controller.function: twoots.delete
+    Request: /api/twoot/delete
+    Method: POST
+    Bodies:
+        token
+        twootId
+    Returns when success
+        message
+    Returns when failed
+        error

@@ -21,17 +21,32 @@ module.exports = {
     //required body: content, twootId
     update(request, response) {
 
-        return Twoot
-            .update({
-                    content: request.body.content
-                },{
-                    where: {
-                        id: request.body.twootId,
-                    }
-                },
-            )
-            .then(twoot => response.status(201).send(twoot))
-            .catch(error => response.status(400).send(error));
+        if(request.body.content && request.body.twootId){
+
+            const newContent = request.body.content;
+
+            if(newContent===''){
+                response.status(200).send({message: 'No updates were made.'})
+            }
+
+            return Twoot
+                .update({
+                        content: request.body.content
+                    },{
+                        where: {
+                            id: request.body.twootId,
+                        }
+                    },
+                )
+                .then(twoot =>{
+                    console.log(twoot)
+                    response.status(201).send(twoot);
+                })
+                .catch(error => response.status(400).send(error));
+        } else {
+            response.status(401).send({message: 'Body is not complete'});
+            return;
+        }
 
     },
 
